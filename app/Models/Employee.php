@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Utils\SelectorValues;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -30,5 +31,16 @@ class Employee extends Model
         return $this->belongsToMany(Specialty::class);
     }
 
+    public static function selectors(){
+        return new SelectorValues(route('employee.search'),"employee",[
+            'name' => 'Nome',
+            'email' => 'Email',
+            'birthday' => 'Aniversário',
+            'phone' => 'Contacto',
+            'gender' => 'Gênero',
+            'naturalness' => 'Nacionalidade',
+            'nationality' => 'Naturalidade'
+        ]);
+    }
 
 }

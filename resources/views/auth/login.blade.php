@@ -1,5 +1,15 @@
 @extends('template.doc')
 @section('clsb', "bg-gradient-primary")
+@section('css')
+    <style>
+        .bg-login-image{
+            background: url('{{ asset('img/shield.png') }}') no-repeat;
+            background-size: cover;
+            background-position: center;
+            padding: 5rem;
+        }
+    </style>
+@endsection
 @section('content')
     <div class="container">
 
@@ -18,7 +28,8 @@
                                     <div class="text-center">
                                         <h1 class="h4 text-gray-900 mb-4">Autenticação</h1>
                                     </div>
-                                    <form class="user">
+                                    <form class="user" action="{{ route('login') }}" method="POST">
+                                        @csrf
                                         <div class="form-group">
                                             <input type="email" class="form-control form-control-user"
                                                 id="exampleInputEmail" aria-describedby="emailHelp"
@@ -35,18 +46,24 @@
                                                 <label class="custom-control-label" for="customCheck">Lembra de mí.</label>
                                             </div>
                                         </div>
-                                        <a href="index.html" class="btn btn-primary btn-user btn-block">
-                                            Login
-                                        </a>
+                                        <button type="submit" class="btn btn-primary btn-user btn-block">
+                                            Autenticar
+                                        </button>
                                         <hr>
                                         <a href="index.html" class="btn btn-google btn-user btn-block">
-                                            <i class="fab fa-google fa-fw"></i> Login with Google
+                                            <i class="fab fa-google fa-fw"></i> Autenticação com Google
                                         </a>
                                         <a href="index.html" class="btn btn-facebook btn-user btn-block">
-                                            <i class="fab fa-facebook-f fa-fw"></i> Login with Facebook
+                                            <i class="fab fa-facebook-f fa-fw"></i> Autenticação com Facebook
                                         </a>
                                     </form>
                                     <hr>
+                                    <div class="text-center">
+                                        <a class="small" href="/">
+                                            <i class="fas fa-home"></i>
+                                            <span>Página inicial</span>
+                                        </a>
+                                    </div>
                                     <div class="text-center">
                                         <a class="small" href="forgot-password.html">Esqueçi a senha?</a>
                                     </div>

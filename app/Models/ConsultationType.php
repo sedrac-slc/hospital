@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Utils\SelectorValues;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -21,6 +22,14 @@ class ConsultationType extends Model
 
     public function consultations(){
         return $this->hasMany(Consultation::class);
+    }
+
+    public static function selectors(){
+        return new SelectorValues(route('consultation_type.search'),"consultation_type",[
+            "name" => "Nome",
+            "price" => "Preço",
+            "description" => "Descrição"
+        ]);
     }
 
 }

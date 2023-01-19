@@ -19,7 +19,7 @@
             box-sizing: border-box;
         }
 
-        .text-indent-25{
+        .text-indent-25 {
             text-indent: 50px;
         }
 
@@ -80,24 +80,33 @@
                         <p class="text-justify font-weight-bolder text-white">
                             Caro cliente, seja bem vindo ao website hostiweb, onde poderás encontra serviços relacionado
                         </p>
-                        <div class="row">
-                            <div class="col-md-6">
-                                <div class="m-1">
-                                    <a class="btn btn-light btn-lg w-100" href="{{ route('login') }}" role="button">
-                                        <i class="fas fa-user-shield text-primary"></i>
-                                        <span>Autenticação</span>
-                                    </a>
+                        @if (Route::has('login'))
+                            @auth
+                                <a href="{{ route('home') }}" class="btn btn-lg btn-light m-2 p-2">
+                                    <i class="fas fa-solar-panel"></i>
+                                    <span>Painel de control</span>
+                                </a>
+                            @else
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="m-1">
+                                            <a class="btn btn-light btn-lg w-100" href="{{ route('login') }}" role="button">
+                                                <i class="fas fa-user-shield text-primary"></i>
+                                                <span>Autenticação</span>
+                                            </a>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="m-1">
+                                            <a class="btn btn-light btn-lg w-100" href="{{ route('register') }}" role="button">
+                                                <i class="fas fa-file-alt text-primary"></i>
+                                                <span>Cadastramento</span>
+                                            </a>
+                                        </div>
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="m-1">
-                                    <a class="btn btn-light btn-lg w-100" href="{{ route('register') }}" role="button">
-                                        <i class="fas fa-file-alt text-primary"></i>
-                                        <span>Cadastramento</span>
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
+                            @endauth
+                        @endif
                     </div>
                     <div class="col-md-6 text-center img-doctor"></div>
                 </div>
@@ -115,7 +124,8 @@
                         </h2>
                         <p class="text-justify">
                             Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo,
-                            tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada
+                            tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem
+                            malesuada
                             magna mollis euismod. Donec sed odio dui.
                         </p>
                         <p><a class="btn btn-secondary mt-1" href="#" role="button">View details »</a></p>
@@ -129,7 +139,8 @@
                         </h2>
                         <p class="text-justify">
                             Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo,
-                            tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada
+                            tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem
+                            malesuada
                             magna mollis euismod. Donec sed odio dui.
                         </p>
                         <p><a class="btn btn-secondary mt-1" href="#" role="button">View details »</a></p>
@@ -158,97 +169,105 @@
     </main>
 
     <!-- /footer-->
-<!-- Remove the container if you want to extend the Footer to full width. -->
-<div class="mt-5">
-    <footer class="text-white text-center text-lg-start bg-gradient-primary">
-      <!-- Grid container -->
-      <div class="container p-4">
-        <!--Grid row-->
-        <div class="row mt-4">
-          <!--Grid column-->
-          <div class="col-lg-4 col-md-12 mb-4 mb-md-0">
-            <h5 class="text-uppercase mb-4">Sobre a companhia!</h5>
+    <!-- Remove the container if you want to extend the Footer to full width. -->
+    <div class="mt-5">
+        <footer class="text-white text-center text-lg-start bg-gradient-primary">
+            <!-- Grid container -->
+            <div class="container p-4">
+                <!--Grid row-->
+                <div class="row mt-4">
+                    <!--Grid column-->
+                    <div class="col-lg-4 col-md-12 mb-4 mb-md-0">
+                        <h5 class="text-uppercase mb-4">Sobre a companhia!</h5>
 
-            <p class="text-justify text-indent-25">
-              A companhia presta serviços ligado a área de saúde, o nosso objectivo é fornecer os nossos serviços de
-              forma simples e fácil com preços justo e disponibilidade de atendimento a qualquer momento.
-            </p>
+                        <p class="text-justify text-indent-25">
+                            A companhia presta serviços ligado a área de saúde, o nosso objectivo é fornecer os nossos
+                            serviços de
+                            forma simples e fácil com preços justo e disponibilidade de atendimento a qualquer momento.
+                        </p>
 
-            <div class="mt-4">
-              <!-- Facebook -->
-              <a type="button" class="btn btn-floating btn-light btn-lg"><i class="fab fa-facebook-f"></i></a>
-              <!-- Dribbble -->
-              <a type="button" class="btn btn-floating btn-light btn-lg"><i class="fab fa-dribbble"></i></a>
-              <!-- Twitter -->
-              <a type="button" class="btn btn-floating btn-light btn-lg"><i class="fab fa-twitter"></i></a>
-              <!-- Google + -->
-              <a type="button" class="btn btn-floating btn-light btn-lg"><i class="fab fa-google-plus-g"></i></a>
-              <!-- Linkedin -->
+                        <div class="mt-4">
+                            <!-- Facebook -->
+                            <a type="button" class="btn btn-floating btn-light btn-lg"><i
+                                    class="fab fa-facebook-f"></i></a>
+                            <!-- Dribbble -->
+                            <a type="button" class="btn btn-floating btn-light btn-lg"><i
+                                    class="fab fa-dribbble"></i></a>
+                            <!-- Twitter -->
+                            <a type="button" class="btn btn-floating btn-light btn-lg"><i
+                                    class="fab fa-twitter"></i></a>
+                            <!-- Google + -->
+                            <a type="button" class="btn btn-floating btn-light btn-lg"><i
+                                    class="fab fa-google-plus-g"></i></a>
+                            <!-- Linkedin -->
+                        </div>
+                    </div>
+                    <!--Grid column-->
+
+                    <!--Grid column-->
+                    <div class="col-lg-4 col-md-6 mb-4 mb-md-0">
+                        <h5 class="text-uppercase mb-4 pb-1">
+                            Deixar o seu email?
+                        </h5>
+
+                        <div class="form-outline form-white mb-4">
+                            <input type="text" id="formControlLg" class="form-control form-control-lg" />
+                            <label class="form-label" for="formControlLg">
+                                Enviar
+                            </label>
+                        </div>
+
+                        <ul class="fa-ul" style="margin-left: 1.65em;">
+                            <li class="mb-3">
+                                <span class="fa-li"><i class="fas fa-home"></i></span><span class="ms-2">Warsaw,
+                                    00-967, Poland</span>
+                            </li>
+                            <li class="mb-3">
+                                <span class="fa-li"><i class="fas fa-envelope"></i></span><span
+                                    class="ms-2">contact@example.com</span>
+                            </li>
+                            <li class="mb-3">
+                                <span class="fa-li"><i class="fas fa-phone"></i></span><span class="ms-2">+ 48 234 567
+                                    88</span>
+                            </li>
+                        </ul>
+                    </div>
+                    <!--Grid column-->
+
+                    <!--Grid column-->
+                    <div class="col-lg-4 col-md-6 mb-4 mb-md-0">
+                        <h5 class="text-uppercase mb-4">Horas de serviços?</h5>
+
+                        <table class="table text-center text-white">
+                            <tbody class="fw-normal">
+                                <tr>
+                                    <td>Segunda - Terça:</td>
+                                    <td>8am - 5pm</td>
+                                </tr>
+                                <tr>
+                                    <td>Quarta - Sexta:</td>
+                                    <td>8am - 6am</td>
+                                </tr>
+                                <tr>
+                                    <td>Domingo:</td>
+                                    <td>8am - 4pm</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <!--Grid column-->
+                </div>
+                <!--Grid row-->
             </div>
-          </div>
-          <!--Grid column-->
+            <!-- Grid container -->
 
-          <!--Grid column-->
-          <div class="col-lg-4 col-md-6 mb-4 mb-md-0">
-            <h5 class="text-uppercase mb-4 pb-1">
-                Deixar o seu email?
-            </h5>
-
-            <div class="form-outline form-white mb-4">
-              <input type="text" id="formControlLg" class="form-control form-control-lg" />
-              <label class="form-label" for="formControlLg">
-                Enviar
-              </label>
+            <!-- Copyright -->
+            <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2);">
+                © 2023 Copyright:
+                <a class="text-white" href="https://mdbootstrap.com/">www.hospiweb.com</a>
             </div>
+            <!-- Copyright -->
+        </footer>
 
-            <ul class="fa-ul" style="margin-left: 1.65em;">
-              <li class="mb-3">
-                <span class="fa-li"><i class="fas fa-home"></i></span><span class="ms-2">Warsaw, 00-967, Poland</span>
-              </li>
-              <li class="mb-3">
-                <span class="fa-li"><i class="fas fa-envelope"></i></span><span class="ms-2">contact@example.com</span>
-              </li>
-              <li class="mb-3">
-                <span class="fa-li"><i class="fas fa-phone"></i></span><span class="ms-2">+ 48 234 567 88</span>
-              </li>
-            </ul>
-          </div>
-          <!--Grid column-->
-
-          <!--Grid column-->
-          <div class="col-lg-4 col-md-6 mb-4 mb-md-0">
-            <h5 class="text-uppercase mb-4">Horas de serviços?</h5>
-
-            <table class="table text-center text-white">
-              <tbody class="fw-normal">
-                <tr>
-                  <td>Segunda - Terça:</td>
-                  <td>8am - 5pm</td>
-                </tr>
-                <tr>
-                  <td>Quarta - Sexta:</td>
-                  <td>8am - 6am</td>
-                </tr>
-                <tr>
-                  <td>Domingo:</td>
-                  <td>8am - 4pm</td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-          <!--Grid column-->
-        </div>
-        <!--Grid row-->
-      </div>
-      <!-- Grid container -->
-
-      <!-- Copyright -->
-      <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2);">
-        © 2023 Copyright:
-        <a class="text-white" href="https://mdbootstrap.com/">www.hospiweb.com</a>
-      </div>
-      <!-- Copyright -->
-    </footer>
-
-  </div>
+    </div>
 @endsection
