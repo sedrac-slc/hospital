@@ -25,7 +25,7 @@ class ConsultationType extends Model
     }
 
     public static function selectors(){
-        return new SelectorValues(route('consultation_type.search'),"consultation_type",[
+        return new SelectorValues("consultation_type",[
             "name" => "Nome",
             "price" => "Preço",
             "description" => "Descrição"

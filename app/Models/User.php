@@ -26,6 +26,7 @@ class User extends Authenticatable
         'birthday',
         'phone',
         'gender',
+        'image',
         'naturalness',
         'nationality',
         'created_by',

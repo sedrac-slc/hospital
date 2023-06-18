@@ -19,23 +19,17 @@ class OccupationController extends Controller
         return view($page, compact('occupations', 'active', 'search'));
     }
 
-    public function index(){
+    public function index(Request $request){
         try {
+            if(isset($request->arg) && isset($request->search)){
+                $occupations = Occupation::where($request->arg,"like","%{$request->search}%")->paginate();
+                return $this->indexPage($occupations);
+            }
             $occupations = Occupation::paginate();
             return $this->indexPage($occupations);
         } catch (Exception) {
-            return redirect()->back()->with('error',"Não foi possível a realização da operação");;
+            return redirect()->back();
         };
-    }
-
-    public function search(Request $request){
-        try {
-            $request->validate(['arg' => 'required','search' => 'required']);
-            $occupations = Occupation::where($request->arg, "LIKE", "%" . $request->search . "%")->paginate();
-            return $this->indexPage($occupations);
-        } catch (Exception) {
-            return redirect()->back()->with('error',"Não foi possível a realização da operação");
-        }
     }
 
     public function create(){
@@ -48,9 +42,11 @@ class OccupationController extends Controller
             $data['created_by'] =  $data['updated_by'] = Auth::user()->id;
             $data['created_at'] =  $data['updated_at'] = Carbon::now();
             Occupation::create($data);
-            return redirect()->route('occupation.index')->with('success',"Processo de adição realizado com successo");
+            toastr()->success('Operação realizado com successo', 'Successo');
+            return redirect()->route('occupation.index');
         } catch (Exception) {
-            return redirect()->back()->with('error',"Erro na realização da operação");
+            toastr()->error('Não possível realização desta operador', 'Erro');
+            return redirect()->back();
         }
     }
 
@@ -66,9 +62,11 @@ class OccupationController extends Controller
             $data['updated_at'] = Carbon::now();
             $occupations = Occupation::find($id);
             $occupations->update($data);
-            return redirect()->route('occupation.index')->with('success',"Processo de actualização realizado com successo");
+            toastr()->success('Operação realizado com successo', 'Successo');
+            return redirect()->route('occupation.index');
         } catch (Exception) {
-            return redirect()->back()->with('error',"Erro na realização da operação");
+            toastr()->error('Não possível realização desta operador', 'Erro');
+            return redirect()->back();
         }
     }
 
@@ -81,9 +79,11 @@ class OccupationController extends Controller
         try {
             $occupations = Occupation::find($id);
             $occupations->delete();
-            return redirect()->route('occupation.index')->with('success',"Processo de eliminação realizado com successo");
+            toastr()->success('Operação realizado com successo', 'Successo');
+            return redirect()->route('occupation.index');
         } catch (Exception) {
-            return redirect()->back()->with('error',"Erro na realização da operação");
+            toastr()->error('Não possível realização desta operador', 'Erro');
+            return redirect()->back();
         }
     }
 

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\SpecialtyRequest;
+use App\Models\Employee;
 use App\Models\Specialty;
 use Carbon\Carbon;
 use Exception;
@@ -18,12 +19,33 @@ class SpecialtyController extends Controller
         return view($page, compact('specialties', 'active', 'search'));
     }
 
-    public function index(){
+    public function index(Request $request){
         try {
-            $specialties = Specialty::paginate();
-            return $this->indexPage($specialties);
+            $active = "specialty";
+            $search = Specialty::selectors();
+            $specialties = Specialty::orderBy('specialties.created_at','DESC');
+            if(isset($request->arg) && isset($request->search)){
+                $specialties = $specialties->where("specialties.".$request->arg,"like","%{$request->search}%");
+            }
+            if(isset($request->employee)){
+                $employee = Employee::with('specialties')->find($request->employee);
+                if(isset($request->action) && $request->action == "add"){
+                    $specialties = $specialties->distinct('specialties.id')->paginate();
+                    $specialtiesOfEmployee = collect($employee->specialties)->map(function($e){
+                        return $e->id;
+                    });
+                    return view('painels.specialty.index', compact('specialties', 'active', 'search','employee','specialtiesOfEmployee'));
+                }
+                $specialties = $specialties->join('employee_specialty','specialties.id','specialty_id')
+                                           ->where('employee_id',$request->employee)
+                                           ->paginate();
+                return view('painels.specialty.index', compact('specialties', 'active', 'search','employee'));
+            }
+            $specialties = $specialties->paginate();
+            return view('painels.specialty.index', compact('specialties', 'active', 'search'));
         } catch (Exception) {
-            return redirect()->back()->with('error',"Não foi possível a realização da operação");;
+            toastr()->error('Não possível realização desta operador', 'Erro');
+            return redirect()->back();
         };
     }
 
@@ -33,7 +55,7 @@ class SpecialtyController extends Controller
             $specialties = Specialty::where($request->arg, "LIKE", "%" . $request->search . "%")->paginate();
             return $this->indexPage($specialties);
         } catch (Exception) {
-            return redirect()->back()->with('error',"Não foi possível a realização da operação");
+            return redirect()->back();
         }
     }
 
@@ -47,9 +69,11 @@ class SpecialtyController extends Controller
             $data['created_by'] =  $data['updated_by'] = Auth::user()->id;
             $data['created_at'] =  $data['updated_at'] = Carbon::now();
             Specialty::create($data);
-            return redirect()->route('specialty.index')->with('success',"Processo de adição realizado com successo");
+            toastr()->success('Operação realizado com successo', 'Successo');
+            return redirect()->route('specialty.index');
         } catch (Exception) {
-            return redirect()->back()->with('error',"Erro na realização da operação");
+            toastr()->error('Não possível realização desta operador', 'Erro');
+            return redirect()->back();
         }
     }
 
@@ -65,9 +89,11 @@ class SpecialtyController extends Controller
             $data['updated_at'] = Carbon::now();
             $specialties = Specialty::find($id);
             $specialties->update($data);
-            return redirect()->route('specialty.index')->with('success',"Processo de actualização realizado com successo");
+            toastr()->success('Operação realizado com successo', 'Successo');
+            return redirect()->route('specialty.index');
         } catch (Exception) {
-            return redirect()->back()->with('error',"Erro na realização da operação");
+            toastr()->error('Não possível realização desta operador', 'Erro');
+            return redirect()->back();
         }
     }
 
@@ -80,9 +106,11 @@ class SpecialtyController extends Controller
         try {
             $specialties = Specialty::find($id);
             $specialties->delete();
-            return redirect()->route('specialty.index')->with('success',"Processo de eliminação realizado com successo");
+            toastr()->success('Operação realizado com successo', 'Successo');
+            return redirect()->route('specialty.index');
         } catch (Exception) {
-            return redirect()->back()->with('error',"Erro na realização da operação");
+            toastr()->error('Não possível realização desta operador', 'Erro');
+            return redirect()->back();
         }
     }
 

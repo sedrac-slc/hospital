@@ -32,7 +32,7 @@ class Employee extends Model
     }
 
     public static function selectors(){
-        return new SelectorValues(route('employee.search'),"employee",[
+        return new SelectorValues("employee",[
             'name' => 'Nome',
             'email' => 'Email',
             'birthday' => 'Aniversário',

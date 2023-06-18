@@ -74,22 +74,22 @@ class DatabaseSeeder extends Seeder
         ]);
 
         $occupation1 = \App\Models\Occupation::create([
-            'position' => 'medico',
-            'description' => 'controla todos processos',
+            'position' => 'Director de operações',
+            'description' => 'Controla as realização das operações',
             'created_by' => $user1->id,
             'updated_by' => $user1->id
         ]);
 
         $occupation2 = \App\Models\Occupation::create([
-            'position' => 'enfermagem',
-            'description' => 'cuida das pessoas',
+            'position' => 'Gerente de anabolizante',
+            'description' => 'Cuida da distribuição de anabolizante',
             'created_by' => $user2->id,
             'updated_by' => $user1->id
         ]);
 
         $occupation3 = \App\Models\Occupation::create([
-            'position' => 'fascina',
-            'description' => 'limpeza do hospital',
+            'position' => 'Director de Limpeza',
+            'description' => 'Cuida da limpeza corporal dos pacientes',
             'created_by' => $user2->id,
             'updated_by' => $user1->id
         ]);

@@ -14,6 +14,10 @@
         <i class="fas fa-comment"></i>
         <span>Descrição</span>
     </th>
+    <th colspan="2">
+        <i class="fas fa-users"></i>
+        <span>Consultas</span>
+    </th>
     <th colspan="3">
         <i class="fas fa-tools"></i>
        <span>Acções</span>
@@ -25,6 +29,18 @@
             <td>{{ $consultation_type->name }}</td>
             <td>{{ $consultation_type->price }}</td>
             <td>{{ $consultation_type->description }}</td>
+            <td>
+                <a class="text-primary" href="{{ route('consultation.create') }}?consultation_type={{ $consultation_type->id }}">
+                    <i class="fas fa-plus"></i>
+                    <span>adicionar</span>
+                </a>
+            </td>
+            <td>
+                <a class="text-success" href="{{ route('consultation.index') }}?consultation_type={{ $consultation_type->id }}">
+                    <i class="fas fa-list"></i>
+                    <span>listar</span>
+                </a>
+            </td>
             <td>
                 <a class="text-info" href="{{ route('consultation_type.show',$consultation_type->id) }}">
                     <i class="fas fa-eye"></i>

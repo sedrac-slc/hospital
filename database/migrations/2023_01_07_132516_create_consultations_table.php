@@ -15,9 +15,9 @@ return new class extends Migration
     {
         Schema::create('consultations', function (Blueprint $table) {
             $table->uuid('id')->primary();
-            $table->foreignUuid('patient_id')->constrained('patients');
-            $table->foreignUuid('employee_id')->constrained('employees');
-            $table->foreignUuid('consultation_type_id')->constrained('consultation_types');
+            $table->foreignUuid('patient_id')->constrained('patients')->cascadeOnDelete();
+            $table->foreignUuid('employee_id')->constrained('employees')->cascadeOnDelete();
+            $table->foreignUuid('consultation_type_id')->constrained('consultation_types')->cascadeOnDelete();
             $table->decimal('price');
             $table->timestamp('marking_at')->useCurrent();
             $table->uuid('created_by')->nullable();

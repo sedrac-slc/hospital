@@ -24,7 +24,7 @@ class Occupation extends Model
     }
 
     public static function selectors(){
-        return new SelectorValues(route('occupation.search'),"occupation",[
+        return new SelectorValues("occupation",[
             "position" => "Nome",
             "description" => "Descrição"
         ]);

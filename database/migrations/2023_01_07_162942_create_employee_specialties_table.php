@@ -16,8 +16,8 @@ return new class extends Migration
     {
         Schema::create('employee_specialty', function (Blueprint $table) {
             $table->uuid('id')->primary()->default(DB::raw('uuid()'));
-            $table->foreignUuid('employee_id')->constrained('employees');
-            $table->foreignUuid('specialty_id')->constrained('specialties');
+            $table->foreignUuid('employee_id')->constrained('employees')->cascadeOnDelete();
+            $table->foreignUuid('specialty_id')->constrained('specialties')->cascadeOnDelete();
             $table->uuid('created_by')->nullable();
             $table->uuid('updated_by')->nullable();
             $table->timestamps();

@@ -24,7 +24,7 @@ return new class extends Migration
             $table->enum('gender',['FEMALE','MALE']);
             $table->string('naturalness');
             $table->string('nationality');
-            $table->string('image')->default('none');
+            $table->string('image')->nullable();
             $table->uuid('created_by')->nullable();
             $table->uuid('updated_by')->nullable();
             $table->rememberToken();

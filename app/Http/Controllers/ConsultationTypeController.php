@@ -18,12 +18,16 @@ class ConsultationTypeController extends Controller
         return view($page, compact('consultation_types', 'active', 'search'));
     }
 
-    public function index(){
+    public function index(Request $request){
         try {
+            if(isset($request->arg) && isset($request->search)){
+                $consultation_types = ConsultationType::where($request->arg,"like","%{$request->search}%")->paginate();
+                return $this->indexPage($consultation_types);
+            }
             $consultation_types = ConsultationType::paginate();
             return $this->indexPage($consultation_types);
         } catch (Exception) {
-            return redirect()->back()->with('error',"Não foi possível a realização da operação");;
+            return redirect()->back();
         };
     }
 
@@ -33,7 +37,7 @@ class ConsultationTypeController extends Controller
             $consultation_types = ConsultationType::where($request->arg, "LIKE", "%" . $request->search . "%")->paginate();
             return $this->indexPage($consultation_types);
         } catch (Exception) {
-            return redirect()->back()->with('error',"Não foi possível a realização da operação");
+            return redirect()->back();
         }
     }
 
@@ -47,9 +51,11 @@ class ConsultationTypeController extends Controller
             $data['created_by'] =  $data['updated_by'] = Auth::user()->id;
             $data['created_at'] =  $data['updated_at'] = Carbon::now();
             ConsultationType::create($data);
-            return redirect()->route('consultation_type.index')->with('success',"Processo de adição realizado com successo");
+            toastr()->success('Operação realizado com successo', 'Successo');
+            return redirect()->route('consultation_type.index');
         } catch (Exception) {
-            return redirect()->back()->with('error',"Erro na realização da operação");
+            toastr()->error('Não possível realização desta operador', 'Erro');
+            return redirect()->back();
         }
     }
 
@@ -65,9 +71,11 @@ class ConsultationTypeController extends Controller
             $data['updated_at'] = Carbon::now();
             $consultation_types = ConsultationType::find($id);
             $consultation_types->update($data);
-            return redirect()->route('consultation_type.index')->with('success',"Processo de actualização realizado com successo");
+            toastr()->success('Operação realizado com successo', 'Successo');
+            return redirect()->route('consultation_type.index');
         } catch (Exception) {
-            return redirect()->back()->with('error',"Erro na realização da operação");
+            toastr()->error('Não possível realização desta operador', 'Erro');
+            return redirect()->back();
         }
     }
 
@@ -80,10 +88,20 @@ class ConsultationTypeController extends Controller
         try {
             $consultation_types = ConsultationType::find($id);
             $consultation_types->delete();
-            return redirect()->route('consultation_type.index')->with('success',"Processo de eliminação realizado com successo");
+            toastr()->success('Operação realizado com successo', 'Successo');
+            return redirect()->route('consultation_type.index');
         } catch (Exception) {
-            return redirect()->back()->with('error',"Erro na realização da operação");
+            toastr()->error('Não possível realização desta operador', 'Erro');
+            return redirect()->back();
         }
+    }
+
+    public function json(Request $request)
+    {
+        if(!isset($request->name)) return response()->json(["consultationTypes"=>[]]);
+        if(trim($request->name) == "") return response()->json(["consultationTypes"=>[]]);
+        $consultationTypes = ConsultationType::where('name','like',"%{$request->name}%")->get();
+        return response()->json(["consultationTypes"=>$consultationTypes]);
     }
 
 }

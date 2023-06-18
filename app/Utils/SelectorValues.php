@@ -4,11 +4,9 @@ namespace App\Utils;
 
 class SelectorValues{
     private $name;
-    private $url;
     private $options;
 
-    function __construct($url, $name, $options){
-        $this->url = $url;
+    function __construct($name, $options){
         $this->name = $name;
         $this->options = $options;
     }

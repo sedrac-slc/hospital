@@ -1,14 +1,15 @@
 @extends('template.painel')
 @section('painel-header')
-    <h5 class="text-primary font-weight-bold">
-        <i class="fas fa-plus"></i>
-        <span>Adicionar\Função</span>
-    </h5>
+    <a class="btn btn-user btn-info" href="{{ url()->previous() }}">
+        <i class="fas fa-arrow-left"></i>
+        <span>voltar</span>
+    </a>
+    <h4 class="mt-2">
+        <i class="fas fa-user-tie"></i>
+        <span>Ocupação:</span>
+        <span>{{ $occupation->position }}</span>
+    </h4>
 @endsection
 @section('painel-body')
-    @include('components.form.occupation',[
-        'route' =>  route('occupation.store'),
-        'method' => 'POST',
-        'button_desc' => 'adicionar'
-    ])
+    @include('components.form.user')
 @endsection

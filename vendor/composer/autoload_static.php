@@ -34,7 +34,6 @@ class ComposerStaticInit7f4363dbef0f76d1b856ece778be7737
         '58571171fd5812e6e447dce228f52f4d' => __DIR__ . '/..' . '/laravel/framework/src/Illuminate/Support/helpers.php',
         '6124b4c8570aa390c21fafd04a26c69f' => __DIR__ . '/..' . '/myclabs/deep-copy/src/DeepCopy/deep_copy.php',
         'b6b991a57620e2fb6b2f66f03fe9ddc2' => __DIR__ . '/..' . '/symfony/string/Resources/functions.php',
-        '8c15924acd8bcdca7d143b74c5c435ae' => __DIR__ . '/..' . '/php-flasher/flasher-toastr/helpers.php',
         '320163ac6b93aebe3dc25b60a0533d56' => __DIR__ . '/..' . '/spatie/laravel-ignition/src/helpers.php',
         '101b35f72e0ccb1b5ef72aa86bba3ef9' => __DIR__ . '/..' . '/yoeunes/toastr/src/helpers.php',
     );
@@ -146,7 +145,6 @@ class ComposerStaticInit7f4363dbef0f76d1b856ece778be7737
         'F' => 
         array (
             'Fruitcake\\Cors\\' => 15,
-            'Flasher\\Toastr\\Prime\\' => 21,
             'Flasher\\Prime\\' => 14,
             'Flasher\\Laravel\\' => 16,
             'Faker\\' => 6,
@@ -457,10 +455,6 @@ class ComposerStaticInit7f4363dbef0f76d1b856ece778be7737
         array (
             0 => __DIR__ . '/..' . '/fruitcake/php-cors/src',
         ),
-        'Flasher\\Toastr\\Prime\\' => 
-        array (
-            0 => __DIR__ . '/..' . '/php-flasher/flasher-toastr',
-        ),
         'Flasher\\Prime\\' => 
         array (
             0 => __DIR__ . '/..' . '/php-flasher/flasher',
@@ -553,8 +547,10 @@ class ComposerStaticInit7f4363dbef0f76d1b856ece778be7737
         'App\\Http\\Controllers\\ConsultationTypeController' => __DIR__ . '/../..' . '/app/Http/Controllers/ConsultationTypeController.php',
         'App\\Http\\Controllers\\Controller' => __DIR__ . '/../..' . '/app/Http/Controllers/Controller.php',
         'App\\Http\\Controllers\\EmployeeController' => __DIR__ . '/../..' . '/app/Http/Controllers/EmployeeController.php',
+        'App\\Http\\Controllers\\EmployeeSpecialtyController' => __DIR__ . '/../..' . '/app/Http/Controllers/EmployeeSpecialtyController.php',
         'App\\Http\\Controllers\\HomeController' => __DIR__ . '/../..' . '/app/Http/Controllers/HomeController.php',
         'App\\Http\\Controllers\\OccupationController' => __DIR__ . '/../..' . '/app/Http/Controllers/OccupationController.php',
+        'App\\Http\\Controllers\\OccupationEmployeeController' => __DIR__ . '/../..' . '/app/Http/Controllers/OccupationEmployeeController.php',
         'App\\Http\\Controllers\\PatientController' => __DIR__ . '/../..' . '/app/Http/Controllers/PatientController.php',
         'App\\Http\\Controllers\\SpecialtyController' => __DIR__ . '/../..' . '/app/Http/Controllers/SpecialtyController.php',
         'App\\Http\\Kernel' => __DIR__ . '/../..' . '/app/Http/Kernel.php',
@@ -567,6 +563,12 @@ class ComposerStaticInit7f4363dbef0f76d1b856ece778be7737
         'App\\Http\\Middleware\\TrustProxies' => __DIR__ . '/../..' . '/app/Http/Middleware/TrustProxies.php',
         'App\\Http\\Middleware\\ValidateSignature' => __DIR__ . '/../..' . '/app/Http/Middleware/ValidateSignature.php',
         'App\\Http\\Middleware\\VerifyCsrfToken' => __DIR__ . '/../..' . '/app/Http/Middleware/VerifyCsrfToken.php',
+        'App\\Http\\Requests\\ConsultationTypeRequest' => __DIR__ . '/../..' . '/app/Http/Requests/ConsultationTypeRequest.php',
+        'App\\Http\\Requests\\EmployeeRequest' => __DIR__ . '/../..' . '/app/Http/Requests/EmployeeRequest.php',
+        'App\\Http\\Requests\\OccupationRequest' => __DIR__ . '/../..' . '/app/Http/Requests/OccupationRequest.php',
+        'App\\Http\\Requests\\PatientRequest' => __DIR__ . '/../..' . '/app/Http/Requests/PatientRequest.php',
+        'App\\Http\\Requests\\SpecialtyRequest' => __DIR__ . '/../..' . '/app/Http/Requests/SpecialtyRequest.php',
+        'App\\Http\\Requests\\UserRequest' => __DIR__ . '/../..' . '/app/Http/Requests/UserRequest.php',
         'App\\Models\\Consultation' => __DIR__ . '/../..' . '/app/Models/Consultation.php',
         'App\\Models\\ConsultationType' => __DIR__ . '/../..' . '/app/Models/ConsultationType.php',
         'App\\Models\\Employee' => __DIR__ . '/../..' . '/app/Models/Employee.php',
@@ -579,6 +581,7 @@ class ComposerStaticInit7f4363dbef0f76d1b856ece778be7737
         'App\\Providers\\BroadcastServiceProvider' => __DIR__ . '/../..' . '/app/Providers/BroadcastServiceProvider.php',
         'App\\Providers\\EventServiceProvider' => __DIR__ . '/../..' . '/app/Providers/EventServiceProvider.php',
         'App\\Providers\\RouteServiceProvider' => __DIR__ . '/../..' . '/app/Providers/RouteServiceProvider.php',
+        'App\\Utils\\SelectorValues' => __DIR__ . '/../..' . '/app/Utils/SelectorValues.php',
         'Attribute' => __DIR__ . '/..' . '/symfony/polyfill-php80/Resources/stubs/Attribute.php',
         'Brick\\Math\\BigDecimal' => __DIR__ . '/..' . '/brick/math/src/BigDecimal.php',
         'Brick\\Math\\BigInteger' => __DIR__ . '/..' . '/brick/math/src/BigInteger.php',
@@ -1503,9 +1506,6 @@ class ComposerStaticInit7f4363dbef0f76d1b856ece778be7737
         'Flasher\\Prime\\Translation\\Messages' => __DIR__ . '/..' . '/php-flasher/flasher/Translation/Messages.php',
         'Flasher\\Prime\\Translation\\ResourceInterface' => __DIR__ . '/..' . '/php-flasher/flasher/Translation/ResourceInterface.php',
         'Flasher\\Prime\\Translation\\TranslatorInterface' => __DIR__ . '/..' . '/php-flasher/flasher/Translation/TranslatorInterface.php',
-        'Flasher\\Toastr\\Prime\\ToastrBuilder' => __DIR__ . '/..' . '/php-flasher/flasher-toastr/ToastrBuilder.php',
-        'Flasher\\Toastr\\Prime\\ToastrFactory' => __DIR__ . '/..' . '/php-flasher/flasher-toastr/ToastrFactory.php',
-        'Flasher\\Toastr\\Prime\\ToastrPlugin' => __DIR__ . '/..' . '/php-flasher/flasher-toastr/ToastrPlugin.php',
         'Fruitcake\\Cors\\CorsService' => __DIR__ . '/..' . '/fruitcake/php-cors/src/CorsService.php',
         'Fruitcake\\Cors\\Exceptions\\InvalidOptionException' => __DIR__ . '/..' . '/fruitcake/php-cors/src/Exceptions/InvalidOptionException.php',
         'GrahamCampbell\\ResultType\\Error' => __DIR__ . '/..' . '/graham-campbell/result-type/src/Error.php',
@@ -5837,6 +5837,9 @@ class ComposerStaticInit7f4363dbef0f76d1b856ece778be7737
         'Whoops\\Util\\TemplateHelper' => __DIR__ . '/..' . '/filp/whoops/src/Whoops/Util/TemplateHelper.php',
         'Yoeunes\\Toastr\\Facades\\Toastr' => __DIR__ . '/..' . '/yoeunes/toastr/src/Facades/Toastr.php',
         'Yoeunes\\Toastr\\Toastr' => __DIR__ . '/..' . '/yoeunes/toastr/src/Toastr.php',
+        'Yoeunes\\Toastr\\ToastrBuilder' => __DIR__ . '/..' . '/yoeunes/toastr/src/ToastrBuilder.php',
+        'Yoeunes\\Toastr\\ToastrFactory' => __DIR__ . '/..' . '/yoeunes/toastr/src/ToastrFactory.php',
+        'Yoeunes\\Toastr\\ToastrPlugin' => __DIR__ . '/..' . '/yoeunes/toastr/src/ToastrPlugin.php',
         'Yoeunes\\Toastr\\ToastrServiceProvider' => __DIR__ . '/..' . '/yoeunes/toastr/src/ToastrServiceProvider.php',
         'voku\\helper\\ASCII' => __DIR__ . '/..' . '/voku/portable-ascii/src/voku/helper/ASCII.php',
     );

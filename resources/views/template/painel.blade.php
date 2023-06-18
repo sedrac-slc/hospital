@@ -20,9 +20,6 @@
 @section('backoffice-content')
     @parent
     <div class="p-1 m-1">
-        @include('components.alert_message')
-    </div>
-    <div class="p-1 m-1">
         @yield('painel-header')
     </div>
     <hr class="bg-primary"/>

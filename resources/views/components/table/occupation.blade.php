@@ -38,13 +38,13 @@
             <td>{{ $occupation->position }}</td>
             <td>{{ $occupation->description }}</td>
             <td>
-                <a class="text-primary" href="#">
+                <a class="text-primary" href="{{ route('employee.create') }}?occupation={{ $occupation->id }}">
                     <i class="fas fa-plus"></i>
                     <span>adicionar</span>
                 </a>
             </td>
             <td>
-                <a class="text-success" href="#">
+                <a class="text-success" href="{{ route('employee.index') }}?occupation={{ $occupation->id }}">
                     <i class="fas fa-list"></i>
                     <span>listar</span>
                 </a>

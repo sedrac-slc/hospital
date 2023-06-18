@@ -65,10 +65,10 @@
                                         </a>
                                     </div>
                                     <div class="text-center">
-                                        <a class="small" href="forgot-password.html">Esqueçi a senha?</a>
+                                        <a class="small" href="{{ route('password.request') }}">Senha esquecida?</a>
                                     </div>
                                     <div class="text-center">
-                                        <a class="small" href="register.html">Criar uma conta!</a>
+                                        <a class="small" href="{{ route('register') }}">Criar uma conta!</a>
                                     </div>
                                 </div>
                             </div>
