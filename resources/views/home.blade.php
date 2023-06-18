@@ -13,7 +13,7 @@
                 @php $image = Auth::user()->image; @endphp
                 @if ($image)
                   <div class="mb-3">
-                    <img src="{{ url("storage/{$image}") }}" alt="" srcset="" class="img">
+                    <img src="{{ url("storage/{$image}") }}" alt="" srcset="" class="img-thumbnail" width="150" height="150">
                   </div>
                 @endif
                 <a class="btn btn-warning mb-3" href="#" data-toggle="modal" data-target="#imageModal">
