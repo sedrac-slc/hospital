@@ -19,7 +19,7 @@ class PatientController extends Controller
         try {
             $active = "patient";
             $search = Patient::selectors();
-            $patients = User::join('patients', 'user_id', 'users.id')
+            $patients = User::with('patient.consultations')->join('patients', 'user_id', 'users.id')
                             ->orderBy('users.created_at', 'DESC')
                             ->select('users.*','patients.id as patient_id');
             if (isset($request->arg) && isset($request->search)) {

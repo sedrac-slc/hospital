@@ -31,6 +31,10 @@ class Employee extends Model
         return $this->belongsToMany(Specialty::class);
     }
 
+    public function consultations(){
+        return $this->hasMany(Consultation::class);
+    }
+
     public static function selectors(){
         return new SelectorValues("employee",[
             'name' => 'Nome',

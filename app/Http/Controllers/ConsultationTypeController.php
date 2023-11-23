@@ -21,10 +21,10 @@ class ConsultationTypeController extends Controller
     public function index(Request $request){
         try {
             if(isset($request->arg) && isset($request->search)){
-                $consultation_types = ConsultationType::where($request->arg,"like","%{$request->search}%")->paginate();
+                $consultation_types = ConsultationType::with('consultations')->where($request->arg,"like","%{$request->search}%")->paginate();
                 return $this->indexPage($consultation_types);
             }
-            $consultation_types = ConsultationType::paginate();
+            $consultation_types = ConsultationType::with('consultations')->paginate();
             return $this->indexPage($consultation_types);
         } catch (Exception) {
             return redirect()->back();

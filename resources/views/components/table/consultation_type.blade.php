@@ -39,6 +39,7 @@
                 <a class="text-success" href="{{ route('consultation.index') }}?consultation_type={{ $consultation_type->id }}">
                     <i class="fas fa-list"></i>
                     <span>listar</span>
+                    <sup class="badge bg-secondary text-white">{{ count($consultation_type->consultations ?? []) }}</sup>
                 </a>
             </td>
             <td>

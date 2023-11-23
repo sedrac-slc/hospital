@@ -22,6 +22,10 @@ class Patient extends Model
         return $this->belongsTo(User::class);
     }
 
+    public function consultations(){
+        return $this->hasMany(Consultation::class);
+    }
+
     public static function selectors(){
         return new SelectorValues("employee",[
             'name' => 'Nome',

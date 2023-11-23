@@ -82,43 +82,45 @@
             <td>{{ $employee->nationality }}</td>
             <td>{{ $employee->birthday }}</td>
             <td>
-                <a class="text-primary" href="{{ route('consultation.create') }}?employee={{ $employee->employee_id }}">
+                <a class="text-primary d-flex j-c-c" href="{{ route('consultation.create') }}?employee={{ $employee->employee_id }}">
                     <i class="fas fa-plus"></i>
                     <span>adicionar</span>
                 </a>
             </td>
             <td>
-                <a class="text-success" href="{{ route('consultation.index') }}?employee={{ $employee->employee_id }}">
+                <a class="text-success d-flex j-c-c" href="{{ route('consultation.index') }}?employee={{ $employee->employee_id }}">
                     <i class="fas fa-list"></i>
                     <span>listar</span>
+                    <sup class="badge bg-secondary text-white">{{ count($employee->employee->consultations ?? []) }}</sup>
                 </a>
             </td>
             <td>
-                <a class="text-primary" href="{{ route('specialty.index') }}?employee={{ $employee->employee_id }}&action=add">
+                <a class="text-primary d-flex j-c-c" href="{{ route('specialty.index') }}?employee={{ $employee->employee_id }}&action=add">
                     <i class="fas fa-plus"></i>
                     <span>adicionar</span>
                 </a>
             </td>
             <td>
-                <a class="text-success" href="{{ route('specialty.index') }}?employee={{ $employee->employee_id }}">
+                <a class="text-success d-flex j-c-c" href="{{ route('specialty.index') }}?employee={{ $employee->employee_id }}">
                     <i class="fas fa-list"></i>
                     <span>listar</span>
+                    <sup class="badge bg-secondary text-white">{{ count($employee->employee->specialties ?? []) }}</sup>
                 </a>
             </td>
             <td>
-                <a class="text-info" href="{{ route('employee.show', $employee->employee_id) }}">
+                <a class="text-info d-flex j-c-c" href="{{ route('employee.show', $employee->employee_id) }}">
                     <i class="fas fa-eye"></i>
                     <span>visualizar</span>
                 </a>
             </td>
             <td>
-                <a class="text-warning" href="{{ route('employee.edit', $employee->employee_id) }}">
+                <a class="text-warning d-flex j-c-c" href="{{ route('employee.edit', $employee->employee_id) }}">
                     <i class="fas fa-edit"></i>
                     <span>editar</span>
                 </a>
             </td>
             <td>
-                <a class="text-danger btn-delete" href="#" data-toggle="modal" data-target="#deleteModal"
+                <a class="text-danger btn-delete d-flex j-c-c" href="#" data-toggle="modal" data-target="#deleteModal"
                     data-url="{{ route('employee.destroy', $employee->employee_id) }}">
                     <i class="fas fa-trash"></i>
                     <span>eliminar</span>

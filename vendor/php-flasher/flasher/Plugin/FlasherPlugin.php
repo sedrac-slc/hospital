@@ -45,7 +45,7 @@ final class FlasherPlugin extends Plugin
     public function getRootScript()
     {
         return array(
-            'cdn' => 'https://cdn.jsdelivr.net/npm/@flasher/flasher@1.2.4/dist/flasher.min.js',
+            'cdn' => 'https://cdn.jsdelivr.net/npm/@flasher/flasher@1.3.1/dist/flasher.min.js',
             'local' => '/vendor/flasher/flasher.min.js',
         );
     }
@@ -57,6 +57,21 @@ final class FlasherPlugin extends Plugin
         return array(
             'cdn' => is_string($rootScript) ? array($rootScript) : array($rootScript['cdn']),
             'local' => is_string($rootScript) ? '' : array($rootScript['local']),
+        );
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function getStyles()
+    {
+        return array(
+            'cdn' => array(
+                'https://cdn.jsdelivr.net/npm/@flasher/flasher@1.3.1/dist/flasher.min.css',
+            ),
+            'local' => array(
+                '/vendor/flasher/flasher.min.css',
+            ),
         );
     }
 
@@ -91,6 +106,9 @@ final class FlasherPlugin extends Plugin
         return array_merge(array(
             'default' => $this->getDefault(),
             'root_script' => $this->getRootScript(),
+            'scripts' => array(),
+            'styles' => $this->getStyles(),
+            'options' => array(),
             'use_cdn' => true,
             'auto_translate' => true,
             'auto_render' => true,
@@ -104,7 +122,10 @@ final class FlasherPlugin extends Plugin
 
     /**
      * @param array{
-     *    template_factory?: array{default: string, templates: array<string, string>},
+     *    root_script?: string|array,
+     *    styles?: string|array,
+     *    scripts ?: string|array,
+     *    template_factory?: array{default: string, templates: array<string, array<string, string>>},
      *    auto_create_from_session?: bool,
      *    auto_render?: bool,
      *    types_mapping?: array<string, string>,
@@ -122,6 +143,35 @@ final class FlasherPlugin extends Plugin
      */
     public function normalizeConfig(array $config)
     {
+        if (isset($config['root_script']) && is_string($config['root_script'])) {
+            $config['root_script'] = array(
+                'local' => $config['root_script'],
+                'cdn' => $config['root_script'],
+            );
+        }
+
+        if (isset($config['styles'])) {
+            if (is_string($config['styles'])) {
+                $config['styles'] = array('cdn' => $config['styles'], 'local' => $config['styles']);
+            }
+
+            $config['styles'] = array_merge(array('cdn' => array(), 'local' => array()), $config['styles']);
+
+            $config['styles']['cdn'] = (array) $config['styles']['cdn'];
+            $config['styles']['local'] = (array) $config['styles']['local'];
+        }
+
+        if (isset($config['scripts'])) {
+            if (is_string($config['scripts'])) {
+                $config['scripts'] = array('cdn' => $config['scripts'], 'local' => $config['scripts']);
+            }
+
+            $config['scripts'] = array_merge(array('cdn' => array(), 'local' => array()), $config['scripts']);
+
+            $config['scripts']['cdn'] = (array) $config['scripts']['cdn'];
+            $config['scripts']['local'] = (array) $config['scripts']['local'];
+        }
+
         $deprecatedKeys = array();
 
         if (isset($config['template_factory']['default'])) {
@@ -133,6 +183,14 @@ final class FlasherPlugin extends Plugin
             $deprecatedKeys[] = 'template_factory.templates';
             $config['themes'] = $config['template_factory']['templates'];
             unset($config['template_factory']['templates']);
+        }
+
+        unset($config['template_factory']);
+
+        if (isset($config['themes']['flasher']['options'])) {
+            $deprecatedKeys[] = 'themes.flasher.options';
+            $config['options'] = $config['themes']['flasher']['options'];
+            unset($config['themes']['flasher']['options']);
         }
 
         if (isset($config['auto_create_from_session'])) {

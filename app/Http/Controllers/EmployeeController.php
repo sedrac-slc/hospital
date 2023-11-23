@@ -29,8 +29,10 @@ class EmployeeController extends Controller
         try {
             $active = "employee";
             $search = Employee::selectors();
-            $employees = User::join('employees', 'user_id', 'users.id')->orderBy('users.created_at', 'DESC')
-            ->select("users.*",'employees.id as employee_id');
+            $employees = User::with('employee.consultations','employee.specialties')
+                            ->join('employees', 'user_id', 'users.id')
+                            ->orderBy('users.created_at', 'DESC')
+                            ->select("users.*",'employees.id as employee_id');
             if(isset($request->arg) && isset($request->search)){
                 $employees = $employees->where("users.".$request->arg,"like","%{$request->search}%");
             }
@@ -43,7 +45,7 @@ class EmployeeController extends Controller
             if(isset($request->specialty)){
                 $active = "specialty";
                 $employees = $employees->join('employee_specialty','employee_id','employees.id')
-                                        ->select('users.name','email','gender','naturalness','nationality','birthday','employees.id');
+                                        ->select('users.name','email','gender','naturalness','nationality','birthday','employees.id','employee_id');
                 if(isset($request->action) && $request->action == "add"){
                     $employee_add = true;
                     $employees = $employees->distinct('users.id')->paginate();
@@ -54,7 +56,7 @@ class EmployeeController extends Controller
             }
             $employees = $employees->paginate();
             return view('painels.employee.index', compact('employees', 'active', 'search'));
-        } catch (Exception) {
+        } catch (Exception $e) {
             return redirect()->back();
         };
     }
@@ -77,9 +79,10 @@ class EmployeeController extends Controller
             return view('painels.employee.create', [
                 "active" => "employee",
                 "occupation" => $occupation,
-                "url" => route('employee.store')."?occupation=".$occupation->id
+                "url" => route('employee.store').( isset($occupation->id) ? "?occupation=".$occupation->id : "")
             ]);
-        } catch (Exception) {
+        } catch (Exception $e) {
+            dd($e);
             return redirect()->back()->with('error', "Não foi possível a realização da operação");
         }
     }

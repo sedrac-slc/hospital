@@ -23,7 +23,7 @@ class SpecialtyController extends Controller
         try {
             $active = "specialty";
             $search = Specialty::selectors();
-            $specialties = Specialty::orderBy('specialties.created_at','DESC');
+            $specialties = Specialty::with('employees')->orderBy('specialties.created_at','DESC');
             if(isset($request->arg) && isset($request->search)){
                 $specialties = $specialties->where("specialties.".$request->arg,"like","%{$request->search}%");
             }

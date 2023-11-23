@@ -15,6 +15,12 @@
             gap: 0.2rem;
         }
 
+        .j-c-c{
+            justify-content: center;
+            align-items: center;
+            gap: 0.2rem;
+        }
+
     </style>
 @endsection
 @section('backoffice-content')

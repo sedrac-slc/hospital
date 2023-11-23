@@ -47,6 +47,7 @@
                 <a class="text-success" href="{{ route('employee.index') }}?occupation={{ $occupation->id }}">
                     <i class="fas fa-list"></i>
                     <span>listar</span>
+                    <sup class="badge bg-secondary text-white">{{ count($occupation->employees) }}</sup>
                 </a>
             </td>
             <td>

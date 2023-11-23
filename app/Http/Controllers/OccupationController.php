@@ -22,10 +22,10 @@ class OccupationController extends Controller
     public function index(Request $request){
         try {
             if(isset($request->arg) && isset($request->search)){
-                $occupations = Occupation::where($request->arg,"like","%{$request->search}%")->paginate();
+                $occupations = Occupation::with('employees')->where($request->arg,"like","%{$request->search}%")->paginate();
                 return $this->indexPage($occupations);
             }
-            $occupations = Occupation::paginate();
+            $occupations = Occupation::with('employees')->paginate();
             return $this->indexPage($occupations);
         } catch (Exception) {
             return redirect()->back();
